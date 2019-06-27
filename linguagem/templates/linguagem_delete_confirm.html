@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Deleta SisLinguagem  {% endblock %}
+
+{% block main %}
+
+    <h1>Sistema de Busca de Linguagem no GitHub</h1>
+        <div class="col">
+            {% if user.is_authenticated %}
+                <p>Ola {{user.username }}</p>
+            {% endif %}
+        </div>
+
+    <h3>Deletar Registro</h3>
+
+    <h3>Tem certeza que deseja deletar a linguagem: {{ linguagem.linguagem_name }} Fabricante: {{ linguagem.fabricante }}
+        Rank: {{ linguagem.rank }}</h3>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <br>
+        <button type="submit" class="btn btn-danger">Deletar</button>
+        <a href="{% url 'logout' %}" class="btn btn-dark">Sair</a>
+        <a href="{% url 'linguagem_list' %}" class="btn btn-success">Listar</a>
+        <a href="{% url 'get_repos' %}" class="btn btn-info"> Buscar</a>
+        <a href="{% url 'linguagem_new' %}" class="btn btn-primary"> Incluir</a>
+    </form>
+
+
+
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Desenvolvimento web com Django 2.x Adalberto</span>
+      </div>
+    </footer>
+{% endblock %}

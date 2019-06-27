@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %} Inclui SisLinguagem {% endblock %}
+
+{% block main %}
+    <h1>Sistema de Busca de Linguagem no GitHub</h1>
+     <div class="col">
+            {% if user.is_authenticated %}
+                <p>Ola {{user.username }}</p>
+            {% endif %}
+        </div>
+    <h3>Incluir Registro</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form|bootstrap }}
+        <button type="submit" class="btn btn-danger">Salvar</button>
+        <a href="{% url 'logout' %}" class="btn btn-dark">Sair</a>
+        <a href="{% url 'linguagem_list' %}" class="btn btn-success">Listar</a>
+        <a href="{% url 'get_repos' %}" class="btn btn-info"> Buscar</a>
+    </form>
+{% endblock %}
+
+
+{% block footer %}
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Desenvolvimento web com Django 2.x Adalberto</span>
+      </div>
+    </footer>
+{% endblock %}

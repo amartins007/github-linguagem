@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block title %} Lista & Altera SisLinguagem {% endblock %}
+
+
+{% block main %}
+    <h1>Sistema de Busca de Linguagem no GitHub</h1>
+    <div class="row">
+        <div class="col">
+
+        </div>
+
+        <div class="col-6">
+            <h3>Listagem de Linguagens - Altera - Inclui</h3>
+            <ul class="list-group">
+                {% for linguagem in linguagens %}
+                    <li class="list-group-item">
+                        <a href="{% url 'linguagens_update' linguagem.id %}">Linguagem:{{ linguagem.linguagem_name }}</a>
+                        <a href="{% url 'linguagens_update' linguagem.id %}">Fabricante:{{ linguagem.fabricante }}</a>
+                        <a href="{% url 'linguagens_update' linguagem.id %}">Rank:{{ linguagem.rank }}</a>
+                        <a href="{% url 'linguagens_delete' linguagem.id %}" class="trash-item">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+
+                    </li>
+
+                {% endfor %}
+            </ul>
+            <br>
+
+            <br>
+            <a href="{% url 'linguagem_new' %}" class="btn btn-primary"> Incluir</a>
+            <a href="{% url 'logout' %}" class="btn btn-dark">Sair</a>
+             <a href="{% url 'linguagem_list' %}" class="btn btn-success">Listar</a>
+            <a href="{% url 'get_repos' %}" class="btn btn-info"> Buscar</a>
+            <br>Alterar => Clicar no registro.</br>
+            <a></a>Deletar => Clicar na lixeira ao lado do registro.</a>
+
+        </div>
+
+        <div class="col">
+            {% if user.is_authenticated %}
+                <p>Ola {{user.username }}
+                    <a href="{% url 'logout' %}">
+                        <span class="badge badge-dark">Sair</span>
+                    </a>
+                </p>
+
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Desenvolvimento web com Django 2.x Adalberto</span>
+      </div>
+    </footer>
+{% endblock %}
