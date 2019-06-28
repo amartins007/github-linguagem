@@ -1,1 +1,1 @@
-web: gunicorn website.wsgi --log-file -
+web: gunicorn gestao_linguagem.wsgi --log-file -
