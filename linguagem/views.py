@@ -55,6 +55,7 @@ def get_repos(request):
                'User-Agent': 'Python Student',
                'Accept': 'application/vnd.github.v3+json.raw'}
     api_url = '{}repos/{}/octokit.rb/languages'.format(api_url_base, username)
+    #api_url = '{}repos/{}/octokit.rb/repositories'.format(api_url_base, username)
     response = requests.get(api_url, headers=headers)
 #Testando o retorno do acesso Status code = 200 ok
     if response.status_code == 200:
