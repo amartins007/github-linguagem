@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap %}
 
-{% block title %} Lista & Altera SisLinguagem {% endblock %}
+{% block title %} Lista SisLinguagem {% endblock %}
 
 
 {% block main %}
@@ -12,17 +12,12 @@
         </div>
 
         <div class="col-6">
-            <h3>Listagem de Linguagens - Altera - Inclui</h3>
+            <h3>Listagem do GitHub</h3>
             <ul class="list-group">
                 {% for linguagem in linguagens %}
                     <li class="list-group-item">
-                        <a href="{% url 'linguagens_update' linguagem.id %}">Linguagem:{{ linguagem.linguagem_name }}</a>
-                        <a href="{% url 'linguagens_update' linguagem.id %}">Fabricante:{{ linguagem.fabricante }}</a>
-                        <a href="{% url 'linguagens_update' linguagem.id %}">Rank:{{ linguagem.rank }}</a>
-                        <a href="{% url 'linguagens_delete' linguagem.id %}" class="trash-item">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
-
+                        <b> Linguagem:{{ linguagem.linguagem_name }}
+                           </b>
                     </li>
 
                 {% endfor %}
@@ -30,12 +25,9 @@
             <br>
 
             <br>
-            <a href="{% url 'linguagem_new' %}" class="btn btn-primary"> Incluir</a>
-            <a href="{% url 'logout' %}" class="btn btn-dark">Sair</a>
+             <a href="{% url 'logout' %}" class="btn btn-dark">Sair</a>
              <a href="{% url 'linguagem_list' %}" class="btn btn-success">Listar</a>
             <a href="{% url 'get_repos' %}" class="btn btn-info"> Buscar</a>
-            <br>Alterar => Clicar no registro.</br>
-            <a></a>Deletar => Clicar na lixeira ao lado do registro.</a>
 
         </div>
 
