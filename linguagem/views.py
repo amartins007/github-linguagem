@@ -46,46 +46,51 @@ def linguagens_delete(request, id):
 
     return render(request, 'linguagem_delete_confirm.html', {'linguagem': linguagem})
 
+
 @login_required
-def get_repos(request):
+def get_repos_new(request):
 # Preparando o Header para o acesso com a API do GitHub
     username = 'octokit'
     api_url_base = 'https://api.github.com/'
     headers = {'Content-Type': 'application/json',
                'User-Agent': 'Python Student',
                'Accept': 'application/vnd.github.v3+json.raw'}
-    api_url = '{}repos/{}/octokit.rb/languages'.format(api_url_base, username)
-    #api_url = '{}repos/{}/octokit.rb/repositories'.format(api_url_base, username)
+    api_url = '{}orgs/{}/repos'.format(api_url_base, username)
     response = requests.get(api_url, headers=headers)
 #Testando o retorno do acesso Status code = 200 ok
     if response.status_code == 200:
         repositories = json.loads(response.content.decode('utf-8'))
-        for k, v in repositories.items():
-            v_linguagem = repositories.keys()
-
-#inicio da rotina de Limpeza e Gravaçao das Linguagens no Banco
-        #limpo o banco para buscar os daddos mais recentes do GitHub
-
+        repo_list = repositories
+        v_linguagem = repositories
+#Limpo o banco para buscar os daddos mais recentes do GitHub
         linguagens = Linguagem.objects.all().delete()
-
-        v_repos = v_linguagem
-        for v_repos in v_repos:
+        j = 0
+        while j < 5:
+            #print('Lingua:', j, repo_list[j]['language'])
+            new_lingua = ( repo_list[j]['language'])
+            #print('Forks:',repo_list[j]['forks_count'])
+            new_forks = ( repo_list[j]['forks_count'])
+            #print('Whatches:', j, repo_list[j]['watches_count'])
+            new_watches = (repo_list[j]['watchers_count'])
+#Prepara os dados para gravar no banco
             form = LinguagemForm(request.POST or None, request.FILES or None)
             new_form = form.save(commit=False)
             request.method = "POST"
-            new_form.linguagem_name = v_repos
-            new_form.fabricante = ' '
-            new_form.rank = ' '
+            new_form.linguagem_name = new_lingua
+            new_form.forks = new_forks
+            new_form.watches = new_watches
             new_form.save()
+            j = j + 1
+        else:
+            pass
 
 
+#Salvando no Banco de Dados as linguagens e informações dos Diretórios
         if form.is_valid():
             form.save()
             linguagens = Linguagem.objects.order_by('linguagem_name').all()
             return render(request, 'linguagem_list.html', {'linguagens': linguagens})
         else:
-            #print('Form is Valido:', form.is_valid())
-            #print('Form  do ELse:', form)
             linguagens = Linguagem.objects.order_by('linguagem_name').all()
             return render(request, 'linguagem_list.html', {'linguagens': linguagens})
 
@@ -97,48 +102,3 @@ def get_repos(request):
     else:
         #print('[!] HTTP {0} calling [{1}]'.forrmat(response.status_code, api_url))
         return render(request,None)
-
-
-@login_required
-def linguagens_github_new(request):
-    #v_repos=get_repos.import_data()
-    #get_repos()
-    v_repos = get_repos.v_linguagem.objects.all()
-    form = LinguagemForm(request.POST or None, request.FILES or None)
-    new_form = form.save(commit=False)
-
-    for k, v in v_repos:
-        request.method = "POST"
-        new_form.linguagem_name = v_repos
-        new_form.fabricante = 'Microsoft7'
-        new_form.rank = '79'
-        new_form.save()
-    else:
-        pass
-        #print ('NewForm:', new_form)
-    if form.is_valid():
-        form.save()
-        linguagens = Linguagem.objects.order_by('linguagem_name').all()
-        return render(request, 'linguagem_list.html', {'linguagens': linguagens})
-    else:
-        #print('Form is Valido:', form.is_valid())
-        #print('Form  do ELse:', form)
-        return render(request, 'index.html')
-
-@login_required
-def linguagens_github_new_rodando(request):
-    ImportToDatabase.import_data()
-    form = LinguagemForm(request.POST or None, request.FILES or None)
-    new_form = form.save(commit=False)
-    request.method = "POST"
-    new_form.linguagem_name = 'SQL2'
-    new_form.fabricante = 'Microsoft2'
-    new_form.rank = '77'
-    new_form.save()
-
-    if form.is_valid():
-        form.save()
-        linguagens = Linguagem.objects.order_by('linguagem_name').all()
-        return render(request, 'linguagem_list.html', {'linguagens': linguagens})
-    else:
-        return render(request, 'index.html')

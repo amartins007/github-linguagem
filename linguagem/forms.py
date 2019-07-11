@@ -7,7 +7,7 @@ class LinguagemForm(ModelForm):
 
         model = Linguagem
         ordering = ['linguagem_name']
-        fields = ['linguagem_name', 'fabricante', 'rank' ]
+        fields = ['linguagem_name', 'forks', 'watches' ]
 
 
 

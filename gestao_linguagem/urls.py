@@ -26,7 +26,6 @@ from linguagem.views import linguagens_list
 
 urlpatterns = [
        path('/', linguagens_list, name="linguagem_list"),
-       #path('/', linguagem_views.linguagem_list),
        path('linguagem/', include (linguagem_urls)),
        path('admin/', admin.site.urls),
        path('login/', auth_views.LoginView.as_view(), name='login'),

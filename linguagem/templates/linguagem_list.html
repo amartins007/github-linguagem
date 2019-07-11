@@ -5,18 +5,20 @@
 
 
 {% block main %}
-    <h1>Sistema de Busca Informações no GitHub</h1>
+    <h1>Sistema de Busca no Repositorio Octokit - GitHub</h1>
     <div class="row">
-        <div class="col">
+        <div class="col" >
 
-        </div>
+        </div >
 
-        <div class="col-6">
-            <h3>Listagem do GitHub</h3>
+        <div class="col-10">
+            <h3>Listagem das 5 Linguagens mais Acessadas </h3>
             <ul class="list-group">
                 {% for linguagem in linguagens %}
                     <li class="list-group-item">
-                        <b> Linguagem:{{ linguagem.linguagem_name }}
+                        <b> Linguagem: {{ linguagem.linguagem_name }}
+                        <b> Forks: {{ linguagem.forks }}
+                        <b> Whatchers:: {{ linguagem.watches }}
                            </b>
                     </li>
 
@@ -27,8 +29,9 @@
             <br>
              <a href="{% url 'logout' %}" class="btn btn-dark">Sair</a>
              <a href="{% url 'linguagem_list' %}" class="btn btn-success">Listar</a>
-            <a href="{% url 'get_repos' %}" class="btn btn-info"> Buscar</a>
-
+             <a href="{% url 'get_repos_new' %}" class="btn btn-info"> Buscar</a>
+             <br>Listar => Lista do Bco. de Dados.</br>
+            <a></a>Buscar => Atualiza do Repositório do GitHub.</a>
         </div>
 
         <div class="col">
@@ -49,7 +52,7 @@
 {% block footer %}
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">Desenvolvimento web com Django 2.x Adalberto</span>
+        <span class="text-muted">Desenvolvimento Web com Django 2.x Adalberto</span>
       </div>
     </footer>
 {% endblock %}

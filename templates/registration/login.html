@@ -5,13 +5,13 @@
 {% block title %} Login SisLinguagem {% endblock %}
 
 {% block main %}
-    <h1>Sistema de Busca de Informações no GitHub</h1>
+    <h1>Sistema de Busca no Repositório Octokit - GitHub</h1>
     <h2>Login</h2>
     <form method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
 
-        </a>Só usuários cadatrados podem acessar este sistema. Caso não tenha uma senha solicite ao Administrador do Sistema.</a>
+        </a>Só usuários cadatrados podem acessar este Sistema. Caso não tenha uma senha solicite ao Administrador do Sistema.</a>
         <br>
         <button type="submit" class="btn btn-info">Login</button>
      </form>
