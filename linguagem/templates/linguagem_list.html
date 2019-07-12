@@ -5,10 +5,12 @@
 
 
 {% block main %}
-    <h1>Sistema de Busca no Repositorio Octokit - GitHub</h1>
+    <h1>Sistema de Busca no Repositório Octokit - GitHub</h1>
     <div class="row">
         <div class="col" >
-
+            {% if user.is_authenticated %}
+            <br><p><b>Ola {{user.username }}</b></p></div></br>
+            {% endif %}
         </div >
 
         <div class="col-10">
@@ -16,11 +18,13 @@
             <ul class="list-group">
                 {% for linguagem in linguagens %}
                     <li class="list-group-item">
-                        <b> Linguagem: {{ linguagem.linguagem_name }}
-                        <b> Forks: {{ linguagem.forks }}
-                        <b> Whatchers:: {{ linguagem.watches }}
+                         <a href="{% url 'linguagens_update' linguagem.id %}"> Linguagem: {{ linguagem.linguagem_name }}</a>
+                         <a href="{% url 'linguagens_update' linguagem.id %}"> Forks: {{ linguagem.forks }}</a>
+                         <a href="{% url 'linguagens_update' linguagem.id %}"> Whatchers: {{ linguagem.watches }}</a>
+                         <a href="{% url 'linguagens_delete' linguagem.id %}" class="trash-item">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
                            </b>
-                    </li>
+                     </li>
 
                 {% endfor %}
             </ul>
@@ -30,20 +34,13 @@
              <a href="{% url 'logout' %}" class="btn btn-dark">Sair</a>
              <a href="{% url 'linguagem_list' %}" class="btn btn-success">Listar</a>
              <a href="{% url 'get_repos_new' %}" class="btn btn-info"> Buscar</a>
-             <br>Listar => Lista do Bco. de Dados.</br>
-            <a></a>Buscar => Atualiza do Repositório do GitHub.</a>
+             <a href="{% url 'linguagem_new' %}" class="btn btn-primary"> Incluir</a>
+             <br>Listar   => Lista todos os rgistros do Bco. de Dados.</br>
+            <a> Buscar  => Atualiza as 5 linguagens do Repositório Octokit do GitHub.</a>
+            <br>Editar  => Clicar no registro.</br>
+            <a> Deletar => Clicar na lixeira ao lado do registro.</a>
         </div>
 
-        <div class="col">
-            {% if user.is_authenticated %}
-                <p>Ola {{user.username }}
-                    <a href="{% url 'logout' %}">
-                        <span class="badge badge-dark">Sair</span>
-                    </a>
-                </p>
-
-            {% endif %}
-        </div>
     </div>
 
 

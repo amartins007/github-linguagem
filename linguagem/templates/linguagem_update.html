@@ -4,10 +4,10 @@
 {% block title %} Altera SisLinguagem {% endblock %}
 
 {% block main %}
-    <h1>Sistema de Busca Informações no GitHub</h1>
+       <h1>Sistema de Busca no Repositório Octokit - GitHub</h1>
      <div class="col">
             {% if user.is_authenticated %}
-                <p>Ola {{user.username }}</p>
+                <p><b>Ola {{user.username }}</b></p>
             {% endif %}
         </div>
     <h3>Alterar Registro</h3>
@@ -17,9 +17,11 @@
         <button type="submit" class="btn btn-danger">Salvar</button>
         <a href="{% url 'logout' %}" class="btn btn-dark">Sair</a>
         <a href="{% url 'linguagem_list' %}" class="btn btn-success">Listar</a>
-        <a href="{% url 'get_repos' %}" class="btn btn-info"> Buscar</a>
+        <a href="{% url 'get_repos_new' %}" class="btn btn-info"> Buscar</a>
         <a href="{% url 'linguagem_new' %}" class="btn btn-primary"> Incluir</a>
-    </form>
+        <br>Listar => Lista do Bco. de Dados.</br>
+        <a></a>Buscar => Atualiza do Repositório do GitHub.</a>
+     </form>
 {% endblock %}
 
 
