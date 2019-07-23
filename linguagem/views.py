@@ -89,10 +89,10 @@ def get_repos_new(request):
         if form.is_valid():
             form.save()
             linguagens = Linguagem.objects.order_by('linguagem_name').all()
-            return render(request, 'linguagem_list.html', {'linguagens': linguagens})
+            return render(request, 'linguagem_baixar.html', {'linguagens': linguagens})
         else:
             linguagens = Linguagem.objects.order_by('linguagem_name').all()
-            return render(request, 'linguagem_list.html', {'linguagens': linguagens})
+            return render(request, 'linguagem_baixar.html', {'linguagens': linguagens})
 
 #fim da Rotina de Gravação
 

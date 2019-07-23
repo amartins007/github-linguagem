@@ -16,16 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from linguagem import urls as linguagem_urls
-from django.conf import settings
 from django.contrib.auth import views as auth_views
-from linguagem import views as linguagem_views
 from linguagem.views import linguagens_list
-
-
-
+from linguagem.views import get_repos_new
 
 urlpatterns = [
-       path('/', linguagens_list, name="linguagem_list"),
+       path('list/', linguagens_list, name="linguagem_list"),
+       path('baixar/', get_repos_new, name="linguagem_baixar"),
        path('linguagem/', include (linguagem_urls)),
        path('admin/', admin.site.urls),
        path('login/', auth_views.LoginView.as_view(), name='login'),
